@@ -2,45 +2,57 @@ using UnityEngine;
 
 public class PuppyMovement : MonoBehaviour
 {
-    // Esta variable será visible en el Inspector, ajusta la velocidad aqui.
-    public float movementSpeed = 1.5f; // Velocidad baja para simular lentitud/agotamiento
+    // Variables públicas (ajustables en el Inspector)
+    public float movementSpeed = 0.3f; // Tu velocidad lenta para la atmósfera
 
-    // Referencia al SpriteRenderer para poder voltear el sprite
+    // Referencias a Componentes
+    private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator animator; // ¡La nueva referencia!
 
     void Start()
     {
-        // Obtener el componente SpriteRenderer al inicio del juego
+        // Obtener todos los componentes necesarios
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
+        animator = GetComponent<Animator>(); // Obtener el componente Animator
+
+        // Verificaciones de seguridad (opcional, pero buena práctica)
+        if (rb == null || spriteRenderer == null || animator == null)
         {
-            Debug.LogError("SpriteRenderer no encontrado en el objeto del cachorro.");
+            Debug.LogError("Faltan componentes (Rigidbody/SpriteRenderer/Animator) en el cachorro.");
         }
     }
 
-    void Update()
+    // Usamos FixedUpdate para mover el Rigidbody (colisiones más estables)
+    void FixedUpdate()
     {
         // 1. Obtener la entrada del jugador (WASD)
-        // GetAxisRaw proporciona valores de -1, 0, o 1 (sin suavizado, perfecto para pixel art)
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
 
-        // 2. Calcular el vector de movimiento
         Vector2 movement = new Vector2(inputX, inputY).normalized;
 
-        // 3. Aplicar el movimiento. Usamos Time.deltaTime para movimiento fluido e independiente del frame rate.
-        // Transform.Translate mueve el objeto Kinematic sin problemas.
-        transform.Translate(movement * movementSpeed * Time.deltaTime);
+        // 2. Mover la posición del Rigidbody
+        Vector2 newPosition = rb.position + movement * movementSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(newPosition);
 
-        // 4. Lógica de Giro del Sprite (para que mire hacia donde camina)
+        // 3. LÓGICA DE ANIMACIÓN (Actualizar el Animador)
+        // Calculamos la magnitud del vector de movimiento.
+        // Es 0 cuando no hay entrada, y 1 cuando hay entrada.
+        float currentInputSpeed = movement.magnitude;
+
+        // Le pasamos este valor al parámetro 'Speed' del Animador
+        // Si es 0 (no hay input) -> Idle. Si es > 0.1 (hay input) -> Walk.
+        animator.SetFloat("Speed", currentInputSpeed);
+
+        // 4. Lógica de Giro del Sprite (FlipX)
         if (inputX > 0)
         {
-            // Moviéndose a la derecha: el sprite mira a la derecha (no volteado)
             spriteRenderer.flipX = false;
         }
         else if (inputX < 0)
         {
-            // Moviéndose a la izquierda: voltear el sprite en el eje X
             spriteRenderer.flipX = true;
         }
     }
