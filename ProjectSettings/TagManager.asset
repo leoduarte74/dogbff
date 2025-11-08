@@ -42,8 +42,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Even Before
+    uniqueID: 3094819017
+    locked: 0
   - name: Character
     uniqueID: 1493901709
+    locked: 0
+  - name: C/W
+    uniqueID: 4138794025
     locked: 0
   - name: Weather
     uniqueID: 2544865705

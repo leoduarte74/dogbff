@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
+using UnityEngine.SceneManagement;
 
 public class PuppyMovement : MonoBehaviour
 {
     // Esta variable será visible en el Inspector, ajusta la velocidad aqui.
-    public float movementSpeed = 1.5f; // Velocidad baja para simular lentitud/agotamiento
-
+    public float movementSpeed;
     // Referencia al SpriteRenderer para poder voltear el sprite
     private SpriteRenderer spriteRenderer;
+    public int counter = 0;
 
     void Start()
     {
@@ -20,6 +23,17 @@ public class PuppyMovement : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "Scene2" && counter == 0)
+        {
+            Debug.Log("Nivel 2 - Velocidad mas rapida del cachorro.");
+            movementSpeed = 3f; // Aumentar la velocidad en el Nivel 2
+            counter++; // sumar 1 para que no se vuelva a controlar
+        } else if ((SceneManager.GetActiveScene().name == "Scene1" && counter == 0))
+        {
+            Debug.Log("Nivel 1 - Velocidad lenta del cachorro");
+            movementSpeed = 1.5f; // Velocidad lenta nivel 1
+            counter++;
+        }
         // 1. Obtener la entrada del jugador (WASD)
         // GetAxisRaw proporciona valores de -1, 0, o 1 (sin suavizado, perfecto para pixel art)
         float inputX = Input.GetAxisRaw("Horizontal");
