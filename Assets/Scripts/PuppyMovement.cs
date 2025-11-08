@@ -10,9 +10,11 @@ public class PuppyMovement : MonoBehaviour
     // Referencia al SpriteRenderer para poder voltear el sprite
     private SpriteRenderer spriteRenderer;
     public int counter = 0;
+    public Rigidbody2D rb;
 
     void Start()
     {
+        rb = this.GetComponent<Rigidbody2D>();
         // Obtener el componente SpriteRenderer al inicio del juego
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
@@ -42,10 +44,7 @@ public class PuppyMovement : MonoBehaviour
         // 2. Calcular el vector de movimiento
         Vector2 movement = new Vector2(inputX, inputY).normalized;
 
-        // 3. Aplicar el movimiento. Usamos Time.deltaTime para movimiento fluido e independiente del frame rate.
-        // Transform.Translate mueve el objeto Kinematic sin problemas.
-        transform.Translate(movement * movementSpeed * Time.deltaTime);
-
+        rb.linearVelocity = movement * movementSpeed;
         // 4. Lógica de Giro del Sprite (para que mire hacia donde camina)
         if (inputX > 0)
         {
