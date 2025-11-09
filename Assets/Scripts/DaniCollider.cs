@@ -1,43 +1,46 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-public class StairsCollider1 : MonoBehaviour
+public class DaniCollider : MonoBehaviour
 {
     private GameObject text;
-    private string escalera = "These stairs look dangerous, I'm afraid of heights!";
     private TextManagement textManagement;
     private GameObject dialogue_box;
+    private string dani = "I wonder who that is...";
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        text = GameObject.Find("StairsE");
-        text.GetComponent<TextMeshProUGUI>().enabled = false;
+        text = GameObject.Find("DaniE");
+        text.SetActive(false);
         textManagement = FindFirstObjectByType<TextManagement>();
         dialogue_box = GameObject.Find("DialogueBox_0");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        text.GetComponent<TextMeshProUGUI>().enabled = true;
+        text.SetActive(true);
         if (Input.GetKeyDown(KeyCode.E) && !TextManagement.pressed)
         {
             dialogue_box.SetActive(true);
-            text.GetComponent<TextMeshProUGUI>().enabled = false;
+            text.SetActive(false);
             TextBooleanManager.text_active = true;
-            textManagement.ShowDialog(escalera);
+            textManagement.ShowDialog(dani);
         }
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
-            text.GetComponent<TextMeshProUGUI>().enabled = false;
-            TextBooleanManager.text_active = false;
+        text.SetActive(false);
+        TextBooleanManager.text_active = false;
     }
-        
 }

@@ -54,5 +54,8 @@ TagManager:
   - name: Weather
     uniqueID: 2544865705
     locked: 0
+  - name: UI
+    uniqueID: 3127538741
+    locked: 0
   m_RenderingLayers:
   - Default

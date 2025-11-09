@@ -1,43 +1,46 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-public class StairsCollider1 : MonoBehaviour
+public class Couch1Collider : MonoBehaviour
 {
     private GameObject text;
-    private string escalera = "These stairs look dangerous, I'm afraid of heights!";
     private TextManagement textManagement;
     private GameObject dialogue_box;
+    private string couch1 = "I am perpetually astonished by how this sofa achieves a flawless equilibrium \n between lateral stability, cushion airflow, and long-term postural alignment, making it \n an unrivaled triumph of everyday seating engineering, woof!";
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        text = GameObject.Find("StairsE");
-        text.GetComponent<TextMeshProUGUI>().enabled = false;
+        text = GameObject.Find("Couch1E");
+        text.SetActive(false);
         textManagement = FindFirstObjectByType<TextManagement>();
         dialogue_box = GameObject.Find("DialogueBox_0");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        text.GetComponent<TextMeshProUGUI>().enabled = true;
+        text.SetActive(true);
         if (Input.GetKeyDown(KeyCode.E) && !TextManagement.pressed)
         {
             dialogue_box.SetActive(true);
-            text.GetComponent<TextMeshProUGUI>().enabled = false;
+            text.SetActive(false);
             TextBooleanManager.text_active = true;
-            textManagement.ShowDialog(escalera);
+            textManagement.ShowDialog(couch1);
         }
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
-            text.GetComponent<TextMeshProUGUI>().enabled = false;
-            TextBooleanManager.text_active = false;
+        text.SetActive(false);
+        TextBooleanManager.text_active = false;
     }
-        
 }
