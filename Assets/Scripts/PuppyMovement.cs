@@ -1,60 +1,69 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; // Included if you need scene management later
 
 public class PuppyMovement : MonoBehaviour
 {
-    // Esta variable será visible en el Inspector, ajusta la velocidad aqui.
-    public float movementSpeed;
-    // Referencia al SpriteRenderer para poder voltear el sprite
+    // Public variables (set in Inspector)
+    public float movementSpeed = 0.3f; // --Puppy's movement speed--
+    public static bool is_dialogue_active = false; // --Global flag to block movement--
+
+    // Component references
+    private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    public int counter = 0;
-    public Rigidbody2D rb;
+    private Animator animator;
 
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
-        // Obtener el componente SpriteRenderer al inicio del juego
+        // --Get all necessary components--
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
+        animator = GetComponent<Animator>();
+
+        // --Safety checks--
+        if (rb == null || spriteRenderer == null || animator == null)
         {
-            Debug.LogError("SpriteRenderer no encontrado en el objeto del cachorro.");
+            Debug.LogError("Missing components (Rigidbody/SpriteRenderer/Animator) on puppy.");
         }
+
+        // --Set initial dialogue state to false--
+        is_dialogue_active = false;
     }
 
-    void Update()
+    // --Used for physics and stable movement--
+    void FixedUpdate()
     {
-        if (SceneManager.GetActiveScene().name == "Scene2" && counter == 0)
+        // --BLOCK MOVEMENT IF DIALOGUE IS ACTIVE--
+        if (is_dialogue_active)
         {
-            Debug.Log("Nivel 2 - Velocidad mas rapida del cachorro.");
-            movementSpeed = 3f; // Aumentar la velocidad en el Nivel 2
-            counter++; // sumar 1 para que no se vuelva a controlar
-        } else if ((SceneManager.GetActiveScene().name == "Scene1" && counter == 0))
-        {
-            Debug.Log("Nivel 1 - Velocidad lenta del cachorro");
-            movementSpeed = 1.5f; // Velocidad lenta nivel 1
-            counter++;
+            // --Stop the puppy completely--
+            rb.linearVelocity = Vector2.zero; // CORRECTED PROPERTY NAME
+            animator.SetFloat("Speed", 0f);
+            return;
         }
-        // 1. Obtener la entrada del jugador (WASD)
-        // GetAxisRaw proporciona valores de -1, 0, o 1 (sin suavizado, perfecto para pixel art)
+
+        // --Get player input (WASD)--
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
 
-        // 2. Calcular el vector de movimiento
         Vector2 movement = new Vector2(inputX, inputY).normalized;
 
-        rb.linearVelocity = movement * movementSpeed;
-        // 4. Lógica de Giro del Sprite (para que mire hacia donde camina)
+        // --Calculate new position using Rigidbody for solid collision--
+        Vector2 newPosition = rb.position + movement * movementSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(newPosition);
+
+        // --ANIMATION LOGIC: Update Animator 'Speed' parameter--
+        float currentInputSpeed = movement.magnitude;
+        animator.SetFloat("Speed", currentInputSpeed);
+
+        // --Sprite Flip Logic (to face direction of movement)--
         if (inputX > 0)
         {
-            // Moviéndose a la derecha: el sprite mira a la derecha (no volteado)
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = false; // --Facing right--
         }
         else if (inputX < 0)
         {
-            // Moviéndose a la izquierda: voltear el sprite en el eje X
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = true; // --Facing left--
         }
     }
 }

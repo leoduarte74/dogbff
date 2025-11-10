@@ -14,7 +14,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Environment
   - 
   - 
   - 
@@ -42,8 +42,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Even Before
-    uniqueID: 3094819017
+  - name: Background
+    uniqueID: 3776106749
     locked: 0
   - name: Character
     uniqueID: 1493901709
@@ -54,8 +54,11 @@ TagManager:
   - name: Weather
     uniqueID: 2544865705
     locked: 0
-  - name: UI
-    uniqueID: 3127538741
+  - name: Foreground
+    uniqueID: 1724474215
+    locked: 0
+  - name: Fade
+    uniqueID: 1631010963
     locked: 0
   m_RenderingLayers:
   - Default
