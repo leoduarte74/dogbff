@@ -8,19 +8,15 @@ public class PauseManager : MonoBehaviour
     public static PauseManager instance;
 
     // --Assign these in the Inspector--
-    // --Volvimos a GameObject, es más simple--
-    public GameObject pauseMenuCanvas;
-    public AudioMixer mainMixer;
-
-    public GameObject pauseMenuPanel; // --Panel with Resume, Options, Exit--
-    public GameObject optionsPanel;   // --Panel with Slider and Back button--
+    public GameObject pauseMenuCanvas; // --El Canvas que contiene los botones--
+    public AudioMixer mainMixer;     // --El Audio Mixer--
 
     private bool isPaused = false;
-    private float defaultVolume = 0f;
+    private float defaultVolume = 0f; // --To store the normal volume--
 
     void Awake()
     {
-        // --Singleton Pattern--
+        // --Singleton Pattern (Ensures only one PauseManager exists)--
         if (instance == null)
         {
             instance = this;
@@ -32,11 +28,9 @@ public class PauseManager : MonoBehaviour
             return;
         }
 
-        // --Get default volume--
+        // --Get the default volume (0dB is full volume)--
         mainMixer.GetFloat("MasterVolume", out defaultVolume);
     }
-
-    // --Ya no necesitamos OnEnable, OnDisable, OnSceneLoaded--
 
     void Update()
     {
@@ -45,14 +39,7 @@ public class PauseManager : MonoBehaviour
         {
             if (isPaused)
             {
-                if (optionsPanel.activeSelf)
-                {
-                    CloseOptions();
-                }
-                else
-                {
-                    Resume();
-                }
+                Resume();
             }
             else
             {
@@ -65,41 +52,30 @@ public class PauseManager : MonoBehaviour
     public void Pause()
     {
         isPaused = true;
-        pauseMenuCanvas.SetActive(true);
-        pauseMenuPanel.SetActive(true);
-        optionsPanel.SetActive(false);
+        pauseMenuCanvas.SetActive(true); // --Show the pause UI--
 
+        // --Pause the game simulation--
         Time.timeScale = 0f;
+
+        // --Lower the volume--
         mainMixer.SetFloat("MasterVolume", -20f);
     }
 
     public void Resume()
     {
         isPaused = false;
-        pauseMenuCanvas.SetActive(false);
+        pauseMenuCanvas.SetActive(false); // --Hide the pause UI--
+
+        // --Resume the game simulation--
         Time.timeScale = 1f;
+
+        // --Restore the default volume--
         mainMixer.SetFloat("MasterVolume", defaultVolume);
-    }
-
-    public void OpenOptions()
-    {
-        pauseMenuPanel.SetActive(false);
-        optionsPanel.SetActive(true);
-    }
-
-    public void CloseOptions()
-    {
-        pauseMenuPanel.SetActive(true);
-        optionsPanel.SetActive(false);
-    }
-
-    public void SetVolume(float volume)
-    {
-        mainMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
     }
 
     public void ExitToMainMenu()
     {
+        // --CRUCIAL: Unpause before leaving the scene--
         Resume();
         SceneManager.LoadScene("MainMenu");
     }
