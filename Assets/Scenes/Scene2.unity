@@ -3374,7 +3374,7 @@ MonoBehaviour:
   m_Intensity: 1.5
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000008d210b59a991af9729fcb0f6c93077b835746aba
+  m_ApplyToSortingLayers: 000000008d210b59a991af9729fcb0f6c93077b835746aba4ba072c9
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -4119,8 +4119,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1493901709
-  m_SortingLayer: 2
+  m_SortingLayerID: -1750101591
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -5266681046197744149, guid: ca4a0a6c812ffc84bba221f81118baed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4255,7 +4255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
   m_AssetsPPU: 32
-  m_RefResolutionX: 320
+  m_RefResolutionX: 480
   m_RefResolutionY: 180
   m_CropFrame: 0
   m_GridSnapping: 0
@@ -4352,7 +4352,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.125
+  orthographic size: 3.1875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4441,8 +4441,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1200148279
-  m_SortingLayer: 1
+  m_SortingLayerID: 1493901709
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4462575566422144315, guid: 1204dd507d08e8e418e210103ff2fe00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4560,7 +4560,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -4666,8 +4666,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1493901709
-  m_SortingLayer: 2
+  m_SortingLayerID: -1750101591
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -7706002169006976291, guid: 10fe0d97ed749b2488c38fb59ddb25c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4805,7 +4805,7 @@ MonoBehaviour:
   m_Intensity: 1.5
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000008d210b59a991af9729fcb0f6c93077b835746aba
+  m_ApplyToSortingLayers: 000000008d210b59a991af9729fcb0f6c93077b835746aba4ba072c9
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -5113,7 +5113,7 @@ Animator:
   m_GameObject: {fileID: 1584632115}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f8f3615d5de52134c802bc80751380e5, type: 2}
+  m_Controller: {fileID: 9100000, guid: ce8c75aa754e5924b87a4b0a5c31793d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5584,8 +5584,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1167428555
-  m_SortingLayer: 5
+  m_SortingLayerID: -915234741
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -5261992394389525642, guid: 3dcfadd4a04ddcb4a9d243fb2d2729d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5608,7 +5608,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.01, y: -2.97, z: 0}
-  m_LocalScale: {x: 15, y: 6, z: 1}
+  m_LocalScale: {x: 14, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5737,7 +5737,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -1167428555
+  m_SortingLayerID: -915234741
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1897099906
@@ -6085,7 +6085,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -153.83, y: -229.69}
+  m_AnchoredPosition: {x: -153.52, y: -229.69}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2059175247

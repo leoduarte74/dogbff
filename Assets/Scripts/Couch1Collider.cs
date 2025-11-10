@@ -6,7 +6,7 @@ public class Couch1Collider : MonoBehaviour
     private GameObject text;
     private TextManagement textManagement;
     private GameObject dialogue_box;
-    private string couch1 = "I am perpetually astonished by how this sofa achieves a flawless equilibrium \n between lateral stability, cushion airflow, and long-term postural alignment, making it \n an unrivaled triumph of everyday seating engineering, woof!";
+    private string couch1 = " I am perpetually astonished by how this sofa achieves a flawless equilibrium \r\n between lateral stability, cushion airflow, and long-term postural alignment, \\n making it an unrivaled triumph of everyday seating engineering, woof!";
 
 
 
