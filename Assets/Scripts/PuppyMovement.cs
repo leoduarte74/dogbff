@@ -1,59 +1,68 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // Included if you need scene management later
 
 public class PuppyMovement : MonoBehaviour
 {
-    // Variables públicas (ajustables en el Inspector)
-    public float movementSpeed = 0.3f; // Tu velocidad lenta para la atmósfera
+    // Public variables (set in Inspector)
+    public float movementSpeed = 0.3f; // --Puppy's movement speed--
+    public static bool is_dialogue_active = false; // --Global flag to block movement--
 
-    // Referencias a Componentes
+    // Component references
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    private Animator animator; // ¡La nueva referencia!
+    private Animator animator;
 
     void Start()
     {
-        // Obtener todos los componentes necesarios
+        // --Get all necessary components--
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>(); // Obtener el componente Animator
+        animator = GetComponent<Animator>();
 
-        // Verificaciones de seguridad (opcional, pero buena práctica)
+        // --Safety checks--
         if (rb == null || spriteRenderer == null || animator == null)
         {
-            Debug.LogError("Faltan componentes (Rigidbody/SpriteRenderer/Animator) en el cachorro.");
+            Debug.LogError("Missing components (Rigidbody/SpriteRenderer/Animator) on puppy.");
         }
+
+        // --Set initial dialogue state to false--
+        is_dialogue_active = false;
     }
 
-    // Usamos FixedUpdate para mover el Rigidbody (colisiones más estables)
+    // --Used for physics and stable movement--
     void FixedUpdate()
     {
-        // 1. Obtener la entrada del jugador (WASD)
+        // --BLOCK MOVEMENT IF DIALOGUE IS ACTIVE--
+        if (is_dialogue_active)
+        {
+            // --Stop the puppy completely--
+            rb.linearVelocity = Vector2.zero; // CORRECTED PROPERTY NAME
+            animator.SetFloat("Speed", 0f);
+            return;
+        }
+
+        // --Get player input (WASD)--
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
 
         Vector2 movement = new Vector2(inputX, inputY).normalized;
 
-        // 2. Mover la posición del Rigidbody
+        // --Calculate new position using Rigidbody for solid collision--
         Vector2 newPosition = rb.position + movement * movementSpeed * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
 
-        // 3. LÓGICA DE ANIMACIÓN (Actualizar el Animador)
-        // Calculamos la magnitud del vector de movimiento.
-        // Es 0 cuando no hay entrada, y 1 cuando hay entrada.
+        // --ANIMATION LOGIC: Update Animator 'Speed' parameter--
         float currentInputSpeed = movement.magnitude;
-
-        // Le pasamos este valor al parámetro 'Speed' del Animador
-        // Si es 0 (no hay input) -> Idle. Si es > 0.1 (hay input) -> Walk.
         animator.SetFloat("Speed", currentInputSpeed);
 
-        // 4. Lógica de Giro del Sprite (FlipX)
+        // --Sprite Flip Logic (to face direction of movement)--
         if (inputX > 0)
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = false; // --Facing right--
         }
         else if (inputX < 0)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = true; // --Facing left--
         }
     }
 }
