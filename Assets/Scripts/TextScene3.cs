@@ -42,6 +42,6 @@ public class TextScene3 : MonoBehaviour
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         Debug.Log("TextScene3 knows is time to start the text3");
         text_manager.GetComponent<TextManagement1>().ShowDialog(text3);
-        Debug.Log("CAMBIO DE ESCENA");
+        Debug.Log("CAMBIO DE ESCENA"); // CAMBIAR DE ESCENA ACA
     }
 }

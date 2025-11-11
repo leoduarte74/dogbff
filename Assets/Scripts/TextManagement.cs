@@ -94,7 +94,7 @@ public class TextManagement : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Y))
             {
                 OptionText.SetActive(false);
-                Debug.Log("Cambio de Escena");
+                Debug.Log("Cambio de Escena"); // ACA CAMBIA DE ESCENA
                 yield break;
             }
             yield return null;
