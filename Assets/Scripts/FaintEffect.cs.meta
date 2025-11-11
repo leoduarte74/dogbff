@@ -1,2 +1,18 @@
 fileFormatVersion: 2
 guid: c8e4c5d0613cc2e429e0358d51f4f10a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - blinkPanel: {instanceID: 0}
+  - cinematicAudioSource: {instanceID: 0}
+  - carApproachSound: {instanceID: 0}
+  - doorOpenSound: {instanceID: 0}
+  - doorCloseSound: {instanceID: 0}
+  - carDriveAwaySound: {instanceID: 0}
+  - backgroundMusicSource: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

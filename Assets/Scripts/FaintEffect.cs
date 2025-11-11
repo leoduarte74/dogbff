@@ -16,24 +16,29 @@ public class FaintEffect : MonoBehaviour
     public AudioClip doorCloseSound;
     public AudioClip carDriveAwaySound;
 
-    public string nextSceneName = "ApartmentScene";
+    // --(Tu nombre de escena es Scene2 segun la consola)--
+    public string nextSceneName = "Scene2";
 
-    // --NUEVOS CAMPOS PARA LA MÚSICA--
-    // --Arrastra aquí el AudioSource que tiene la música de fondo--
-    public AudioSource backgroundMusicSource;
-    // --A qué volumen quieres bajar la música (0.1 = 10%)--
+    // --NUEVO: TIEMPO DE ESPERA FINAL--
+    // --Aumenta este valor en el Inspector para que dure más el sonido del auto yéndose--
+    public float finalFadeOutWait = 6.0f;
+
+    // --CAMBIO: Convertido a un Array (lista) para aceptar MÚLTIPLES sonidos--
+    public AudioSource[] backgroundMusicSources;
+
     public float musicTargetVolume = 0.1f;
-    // --En cuánto tiempo quieres que baje el volumen--
     public float musicFadeDuration = 1.5f;
 
 
     public void StartBlinking()
     {
+        // --(Esta línea la borramos en el paso anterior, está bien)--
         StartCoroutine(BlinkEffect());
     }
 
     IEnumerator BlinkEffect()
     {
+        // --(Bucle de parpadeo sin cambios)--
         for (int i = 0; i < blinkCount; i++)
         {
             yield return StartCoroutine(Fade(1f, blinkSpeed));
@@ -44,8 +49,8 @@ public class FaintEffect : MonoBehaviour
 
         yield return StartCoroutine(Fade(1f, 0.5f));
 
-        // --NUEVO: Iniciar el fundido de la música--
-        if (backgroundMusicSource != null)
+        // --Iniciar el fundido de la música (ahora afecta a todos los sonidos en el array)--
+        if (backgroundMusicSources.Length > 0)
         {
             StartCoroutine(FadeOutMusic());
         }
@@ -55,7 +60,6 @@ public class FaintEffect : MonoBehaviour
 
     IEnumerator RescueSequence()
     {
-        // --(Tu secuencia de audio de rescate existente)--
         yield return new WaitForSeconds(2.0f);
         cinematicAudioSource.PlayOneShot(carApproachSound);
         yield return new WaitForSeconds(3.0f);
@@ -64,26 +68,43 @@ public class FaintEffect : MonoBehaviour
         cinematicAudioSource.PlayOneShot(doorCloseSound);
         yield return new WaitForSeconds(1.0f);
         cinematicAudioSource.PlayOneShot(carDriveAwaySound);
-        yield return new WaitForSeconds(4.0f);
+
+        // --CAMBIO: Usando la nueva variable de tiempo de espera--
+        yield return new WaitForSeconds(finalFadeOutWait);
+
         SceneManager.LoadScene(nextSceneName);
     }
 
-    // --NUEVA CORRUTINA: Para bajar el volumen de la música--
+    // --CAMBIO: Corrutina actualizada para manejar un Array de AudioSources--
     IEnumerator FadeOutMusic()
     {
-        float startVolume = backgroundMusicSource.volume;
+        // --Almacena todos los volúmenes iniciales--
+        float[] startVolumes = new float[backgroundMusicSources.Length];
+        for (int i = 0; i < backgroundMusicSources.Length; i++)
+        {
+            startVolumes[i] = backgroundMusicSources[i].volume;
+        }
+
         float timer = 0f;
 
         while (timer < musicFadeDuration)
         {
             timer += Time.deltaTime;
-            // --Interpola suavemente el volumen desde el inicio hasta el objetivo--
-            backgroundMusicSource.volume = Mathf.Lerp(startVolume, musicTargetVolume, timer / musicFadeDuration);
+            float progress = timer / musicFadeDuration;
+
+            // --Baja el volumen de CADA audio source en la lista--
+            for (int i = 0; i < backgroundMusicSources.Length; i++)
+            {
+                backgroundMusicSources[i].volume = Mathf.Lerp(startVolumes[i], musicTargetVolume, progress);
+            }
             yield return null;
         }
 
-        // --Asegura que el volumen quede en el valor exacto--
-        backgroundMusicSource.volume = musicTargetVolume;
+        // --Asegura que todos queden en el volumen objetivo--
+        for (int i = 0; i < backgroundMusicSources.Length; i++)
+        {
+            backgroundMusicSources[i].volume = musicTargetVolume;
+        }
     }
 
     // --(Tu función Fade existente)--

@@ -325,7 +325,7 @@ RectTransform:
   m_GameObject: {fileID: 175400632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01035047, y: 0.002968569, z: 0.005968569}
+  m_LocalScale: {x: 0.0066910614, y: 0.0019190314, z: 0.0038583812}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1159333862}
@@ -333,7 +333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2.9899902}
+  m_AnchoredPosition: {x: 0, y: -2.0799866}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &175400634
@@ -468,7 +468,6 @@ GameObject:
   m_Component:
   - component: {fileID: 351604572}
   - component: {fileID: 351604571}
-  - component: {fileID: 351604573}
   - component: {fileID: 351604574}
   m_Layer: 0
   m_Name: DIALOGUE_MANAGER
@@ -507,30 +506,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &351604573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 351604570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e4c5d0613cc2e429e0358d51f4f10a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blinkPanel: {fileID: 1411463654}
-  blinkSpeed: 0.6
-  blinkCount: 2
-  cinematicAudioSource: {fileID: 351604574}
-  carApproachSound: {fileID: 8300000, guid: 4c1ebc11fef3c5446988534f3870c518, type: 3}
-  doorOpenSound: {fileID: 8300000, guid: 3ef68e0d031e6fd4f804163490c1ae0b, type: 3}
-  doorCloseSound: {fileID: 8300000, guid: 3ef68e0d031e6fd4f804163490c1ae0b, type: 3}
-  carDriveAwaySound: {fileID: 8300000, guid: f9ebe75fbed147f4bad57b4a9151fde0, type: 3}
-  nextSceneName: Scene2
-  backgroundMusicSource: {fileID: 1661735128}
-  musicTargetVolume: 0.1
-  musicFadeDuration: 1.5
 --- !u!82 &351604574
 AudioSource:
   m_ObjectHideFlags: 0
@@ -735,7 +710,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.5546875
+  orthographic size: 2.84375
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1288,7 +1263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.27, y: -0.67}
+  m_AnchoredPosition: {x: 2.16, y: -0.78}
   m_SizeDelta: {x: 219.8975, y: 108.1146}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682025243
@@ -1338,8 +1313,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1577,7 +1552,7 @@ Animator:
   m_GameObject: {fileID: 731630372}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ce8c75aa754e5924b87a4b0a5c31793d, type: 2}
+  m_Controller: {fileID: 9100000, guid: f8f3615d5de52134c802bc80751380e5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7437,7 +7412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec5b11a06533d54d81429c9875e0fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 4
+  fadeDuration: 7
 --- !u!114 &1468065511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7705,6 +7680,8 @@ GameObject:
   - component: {fileID: 1661735129}
   - component: {fileID: 1661735130}
   - component: {fileID: 1661735128}
+  - component: {fileID: 1661735131}
+  - component: {fileID: 1661735132}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -7921,6 +7898,130 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1661735131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661735127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e4c5d0613cc2e429e0358d51f4f10a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkPanel: {fileID: 1411463654}
+  blinkSpeed: 1
+  blinkCount: 2
+  cinematicAudioSource: {fileID: 1661735132}
+  carApproachSound: {fileID: 8300000, guid: 4c1ebc11fef3c5446988534f3870c518, type: 3}
+  doorOpenSound: {fileID: 8300000, guid: 3ef68e0d031e6fd4f804163490c1ae0b, type: 3}
+  doorCloseSound: {fileID: 8300000, guid: 3ef68e0d031e6fd4f804163490c1ae0b, type: 3}
+  carDriveAwaySound: {fileID: 8300000, guid: f9ebe75fbed147f4bad57b4a9151fde0, type: 3}
+  nextSceneName: Scene2
+  finalFadeOutWait: 12
+  backgroundMusicSources:
+  - {fileID: 1661735130}
+  - {fileID: 1661735128}
+  musicTargetVolume: 0.01
+  musicFadeDuration: 1.5
+--- !u!82 &1661735132
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661735127}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1740830160
 GameObject:
   m_ObjectHideFlags: 0
@@ -7952,7 +8053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 351604571}
-  faintEffect: {fileID: 351604573}
+  faintEffect: {fileID: 1661735131}
 --- !u!61 &1740830162
 BoxCollider2D:
   m_ObjectHideFlags: 0
